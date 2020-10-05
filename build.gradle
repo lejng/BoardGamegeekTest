@@ -10,5 +10,25 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'junit', name: 'junit', version: '4.12'
+    compile 'io.cucumber:cucumber-java:6.7.0'
+    compile 'io.cucumber:cucumber-junit:6.7.0'
+    compile 'com.codeborne:selenide:5.15.0'
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+task runCucumberTests() {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'gamegeek', 'src/test/resources/features/']
+        }
+    }
 }
