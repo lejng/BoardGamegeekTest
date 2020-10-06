@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.8.1'
+}
+
+group 'org.gamegeek.test'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'junit', name: 'junit', version: '4.12'
+    compile 'io.cucumber:cucumber-java:4.8.1'
+    compile 'io.cucumber:cucumber-junit:4.8.1'
+    compile 'com.codeborne:selenide:5.15.0'
+    compile group: 'io.rest-assured', name: 'rest-assured', version: '4.3.1'
+    compile group: 'io.qameta.allure', name: 'allure-cucumber4-jvm', version: '2.12.1'
+    compile group: 'io.qameta.allure', name: 'allure-selenide', version: '2.13.6'
+    compile group: 'io.qameta.allure', name: 'allure-rest-assured', version: '2.13.6'
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+task runCucumberTests() {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            systemProperty("allure.results.directory", "build/allure-results")
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--plugin', 'io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm',
+                    '--glue', 'gamegeek', 'src/test/resources/features/']
+        }
+    }
+}
+
+allure {
+    version = '2.8.1'
+    autoconfigure = false
+    aspectjweaver = true
+    reportDir = file("${rootProject.rootDir}/build/allure-report")
+}
+
+runCucumberTests.finalizedBy 'allureReport'
