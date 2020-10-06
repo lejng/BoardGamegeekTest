@@ -1,5 +1,7 @@
 package utils;
 
+import io.qameta.allure.Allure;
+
 import java.io.FileInputStream;
 import java.util.Properties;
 
@@ -14,8 +16,8 @@ public class PropertyHelper {
             Properties property = new Properties();
             property.load(fis);
             return property.getProperty(name);
-        }catch (Exception e){
-            // add log
+        }catch (Exception error){
+            Allure.addAttachment(String.format("Error to property by name %s", name), error.getMessage());
         }
         return null;
     }

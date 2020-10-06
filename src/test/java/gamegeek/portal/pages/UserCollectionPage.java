@@ -1,10 +1,9 @@
 package gamegeek.portal.pages;
-;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.By;
 import utils.PropertyHelper;
-
 import java.util.Random;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;

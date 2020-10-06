@@ -7,7 +7,7 @@ import com.codeborne.selenide.SelenideElement;
 import gamegeek.portal.entities.VoteEntity;
 import org.openqa.selenium.By;
 import utils.PropertyHelper;
-
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import static com.codeborne.selenide.Selenide.$;
@@ -28,5 +28,10 @@ public class LanguageDependenceResultDialog extends BaseComponent {
             result.add(new VoteEntity(question, voteCount));
         }
         return result;
+    }
+
+    public String getMostVoteResult(){
+        VoteEntity mostVote = getVoteResult().stream().max(Comparator.comparingInt(VoteEntity::getVoteCount)).get();
+        return mostVote.getVoteCount() == 0 ? "(no votes)" : mostVote.getQuestion();
     }
 }

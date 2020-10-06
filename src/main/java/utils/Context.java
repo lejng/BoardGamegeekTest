@@ -25,8 +25,8 @@ public final class Context {
         storage.put(key, value);
     }
 
-    public Object get(final String key) {
-        return storage.get(key);
+    public <T> T get(final String key) {
+        return (T)storage.get(key);
     }
 
     public void delete(final String key) {

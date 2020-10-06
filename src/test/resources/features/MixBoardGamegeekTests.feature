@@ -9,7 +9,7 @@ Feature: Mix Board Gamegeek Tests Feature
     Then The User Collection Page opened
     When I open random game from User Collection Page
     Then The Boardgame Details Page opened
-      And I save game id by key "GameId" from Boardgame Details Page
       And I save most voted language dependence by key "MostVotedUi" from Boardgame Details Page
-      And I open open language dependence vote result on Boardgame Details Page
-      And I save language dependence vote result by key "VoteResultUi" from Boardgame Details Page
+      And I open language dependence vote result from Boardgame Details Page
+    Then The language dependence vote result from Boardgame Details Page must be equals with vote result from API
+      And The most voted language question from dialog on Boardgame Details Page must be equals question saved by key "MostVotedUi"
