@@ -11,5 +11,5 @@ Feature: Mix Board Gamegeek Tests Feature
     Then The Boardgame Details Page opened
       And I save most voted language dependence by key "MostVotedUi" from Boardgame Details Page
       And I open language dependence vote result from Boardgame Details Page
-    Then The language dependence vote result from Boardgame Details Page must be equals with vote result from API
+    Then The language dependence vote result from dialog on Boardgame Details Page must be equals with vote result from API
       And The most voted language question from dialog on Boardgame Details Page must be equals question saved by key "MostVotedUi"

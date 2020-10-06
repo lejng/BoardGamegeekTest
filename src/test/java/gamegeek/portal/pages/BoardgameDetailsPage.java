@@ -7,19 +7,19 @@ import java.util.regex.Pattern;
 import static com.codeborne.selenide.Selenide.$;
 
 public class BoardgameDetailsPage extends BoardGamegeekBasePage {
-    private By mostVotedLanguageDependence = By.xpath("//span[@item-poll-button='languagedependence']//span[contains(@class,'ng')]");
-    private By buttonOpenLanguageDependence = By.xpath("//span[@item-poll-button='languagedependence']");
+    private By buttonOpenLanguageDependenceLocator = By.xpath("//span[@item-poll-button='languagedependence']");
+    private By pageUniqueElementLocator = By.xpath("//article[contains(@class,'game-description')]");
 
     public boolean isPageOpen() {
-        return super.isComponentOpen(By.xpath("//article[contains(@class,'game-description')]"));
+        return super.isComponentOpen(pageUniqueElementLocator);
     }
 
     public void openLanguageDependenceResult(){
-        $(buttonOpenLanguageDependence).click();
+        $(buttonOpenLanguageDependenceLocator).click();
     }
 
-    public String getMostVotedLanguageDependence(){
-        return $(mostVotedLanguageDependence).text();
+    public String getMostVotedLanguageDependenceValue(){
+        return $(buttonOpenLanguageDependenceLocator).$(By.xpath(".//span[contains(@class,'ng')]")).text();
     }
 
     public LanguageDependenceResultDialog getLanguageDependenceResultDialog(){

@@ -1,7 +1,6 @@
 package utils;
 
 import io.qameta.allure.Allure;
-
 import java.io.FileInputStream;
 import java.util.Properties;
 
@@ -34,11 +33,11 @@ public class PropertyHelper {
         return getProperty(BASE_URL);
     }
 
-    public static int getDefaultTimeout(){
+    public static int getDefaultWaitTimeout(){
         return getIntProperty(TIMEOUT_WAIT);
     }
 
-    public static int getDefaultTimeoutInMill(){
-        return getDefaultTimeout() * 1000;
+    public static int getDefaultWaitTimeoutInMill(){
+        return getDefaultWaitTimeout() * 1000;
     }
 }

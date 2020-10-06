@@ -6,10 +6,13 @@ import org.openqa.selenium.By;
 import static com.codeborne.selenide.Selenide.$;
 
 public class LoginModalDialog extends BaseComponent {
+    private By usernameInputLocator = By.id("inputUsername");
+    private By passwordInputLocator = By.id("inputPassword");
+    private By loginButtonLocator = By.xpath("//*[@name='loginform']//button[@type='submit']");
 
     public void login(UserEntity user){
-        $(By.id("inputUsername")).sendKeys(user.getUserName());
-        $(By.id("inputPassword")).sendKeys(user.getPassword());
-        $(By.xpath("//*[@name='loginform']//button[@type='submit']")).click();
+        $(usernameInputLocator).sendKeys(user.getUserName());
+        $(passwordInputLocator).sendKeys(user.getPassword());
+        $(loginButtonLocator).click();
     }
 }
